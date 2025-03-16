@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NanoChat - On-Device AI Chrome Extension</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <style>
+      :root {
+        --primary-color: #3a86ff;
+        --secondary-color: #8338ec;
+        --dark-color: #0d1117;
+        --light-color: #f8f9fa;
+        --text-color: #24292e;
+        --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--light-color);
+      }
+
+      a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        padding: 80px 0;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+      }
+
+      .hero-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .hero-content {
+        flex: 1;
+      }
+
+      .hero-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 16px;
+        box-shadow: var(--box-shadow);
+        border: 4px solid rgba(255, 255, 255, 0.2);
+      }
+
+      header h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.5px;
+      }
+
+      header p {
+        font-size: 1.25rem;
+        max-width: 650px;
+        margin-bottom: 1.5rem;
+        opacity: 0.9;
+      }
+
+      .logo {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+        background-color: white;
+        background-image: url('images/logo.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 12px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      section:nth-child(even) {
+        background-color: white;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-title h2 {
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .section-title p {
+        font-size: 1.1rem;
+        opacity: 0.8;
+        max-width: 650px;
+        margin: 0 auto;
+      }
+
+      /* Features Section */
+      .features {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 40px;
+      }
+
+      .feature-card {
+        background-color: white;
+        box-shadow: var(--box-shadow);
+        border-radius: 8px;
+        overflow: hidden;
+        flex: 1 1 300px;
+        max-width: 350px;
+        transition: transform 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .feature-content {
+        padding: 20px;
+      }
+
+      .feature-content h3 {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+
+      /* Installation Steps */
+      .installation-steps {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .step {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 30px;
+        align-items: flex-start;
+      }
+
+      .step-number {
+        background-color: var(--primary-color);
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+
+      .step-content h3 {
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+      }
+
+      /* CTA Button */
+      .cta-button {
+        display: inline-block;
+        background-color: white;
+        color: var(--primary-color);
+        padding: 12px 30px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .cta-button:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 40px 0;
+        background-color: var(--dark-color);
+        color: white;
+      }
+
+      footer p {
+        opacity: 0.8;
+        margin-bottom: 20px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 1.1rem;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+      }
+
+      .social-links a:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 900px) {
+        .hero-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-content {
+          order: 1;
+        }
+
+        .hero-image {
+          order: 0;
+          margin-bottom: 30px;
+        }
+
+        .logo {
+          margin: 0 auto 1rem;
+        }
+
+        header p {
+          margin: 0 auto 1.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        header {
+          padding: 60px 0;
+        }
+
+        header h1 {
+          font-size: 2.5rem;
+        }
+
+        section {
+          padding: 60px 0;
+        }
+
+        .feature-card {
+          flex: 1 1 100%;
+        }
+
+        .step {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="logo"></div>
+          <h1>NanoChat</h1>
+          <p>
+            The cutting-edge, on-device AI Chrome Extension powered by Gemini
+            Nano
+          </p>
+          <a href="#installation" class="cta-button">Get Started</a>
+        </div>
+        <div class="hero-image">
+          <img
+            src="images/screenshot.png"
+            alt="NanoChat Chrome Extension interface"
+          />
+        </div>
+      </div>
+    </header>
+
+    <section id="overview">
+      <div class="container">
+        <div class="section-title">
+          <h2>Project Overview</h2>
+          <p>
+            NanoChat brings powerful AI capabilities directly to your browser
+            without compromising your privacy.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-content">
+              <h3>100% On-device AI</h3>
+              <p>
+                Enhanced privacy with no cloud processing. Your conversations
+                stay on your device, ensuring your data remains private and
+                secure.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-content">
+              <h3>Tab Context Awareness</h3>
+              <p>
+                NanoChat understands what you're browsing and delivers relevant,
+                context-sensitive AI responses tailored to your current tab.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <div class="feature-content">
+              <h3>User-Friendly Chat Interface</h3>
+              <p>
+                Seamlessly interact with your browser through an intuitive chat
+                interface designed for natural conversations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Technical Highlights</h2>
+          <p>
+            Built with cutting-edge technology to deliver a responsive, secure,
+            and powerful AI experience.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-content">
+              <h3>Lightweight Performance</h3>
+              <p>
+                Optimized to run efficiently without draining system resources,
+                ensuring a smooth browsing experience.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <div class="feature-content">
+              <h3>Gemini Nano Integration</h3>
+              <p>
+                Powered by Google's Gemini Nano, providing state-of-the-art AI
+                capabilities directly in your browser.
+              </p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🔌</div>
+            <div class="feature-content">
+              <h3>Offline Functionality</h3>
+              <p>
+                Access AI assistance even without an internet connection, thanks
+                to the on-device processing capabilities.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="installation">
+      <div class="container">
+        <div class="section-title">
+          <h2>Installation Guide</h2>
+          <p>Get started with NanoChat in a few simple steps.</p>
+        </div>
+        <div class="installation-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Chrome Web Store Installation</h3>
+              <p>The simplest way to install NanoChat:</p>
+              <ol>
+                <li>
+                  Visit the
+                  <a href="https://chrome.google.com/webstore" target="_blank"
+                    >Chrome Web Store</a
+                  >
+                </li>
+                <li>Search for "NanoChat" in the search bar</li>
+                <li>Click the "Add to Chrome" button</li>
+                <li>Confirm the installation when prompted</li>
+              </ol>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Manual Installation</h3>
+              <p>For developers or advanced users:</p>
+              <ol>
+                <li>
+                  Download the latest release from our
+                  <a
+                    href="https://github.com/yourusername/nanochat/releases"
+                    target="_blank"
+                    >GitHub Releases page</a
+                  >
+                </li>
+                <li>
+                  Unzip the downloaded file to a location on your computer
+                </li>
+                <li>
+                  Open Chrome and navigate to <code>chrome://extensions/</code>
+                </li>
+                <li>
+                  Enable "Developer mode" using the toggle in the top-right
+                  corner
+                </li>
+                <li>Click "Load unpacked" and select the unzipped folder</li>
+                <li>
+                  NanoChat will appear in your extensions list and is ready to
+                  use
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Getting Started</h3>
+              <p>After installation:</p>
+              <ol>
+                <li>
+                  Click the NanoChat icon in your Chrome extensions toolbar
+                </li>
+                <li>The chat interface will open as a sidebar</li>
+                <li>
+                  Grant any requested permissions for optimal functionality
+                </li>
+                <li>Start asking questions or requesting assistance!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="social-links">
+          <a href="https://github.com/abpai/nanochat" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

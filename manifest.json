@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "NanoChat",
+  "description": "NanoChat is a Chrome extension that allows you to use various AI models with your current context.",
+  "background": {
+    "service_worker": "src/pages/background/index.ts"
+  },
+  "action": {
+    "default_title": "NanoChat",
+    "default_icon": {
+      "16": "icon-16.png",
+      "32": "icon-32.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    }
+  },
+  "chrome_url_overrides": {},
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "side_panel": {
+    "default_path": "src/pages/panel/index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "aiLanguageModelOriginTrial",
+    "scripting",
+    "sidePanel",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0X9P5+QtIo5ZalZlmMlTl31dkt5BVwB2Jni38xMHB9hcCvPxRGuLqspsbMNm1PeMZe+aIjSVlAAyc3rX/PQ1BNlB8ub+UbnpYSVjCxqg+9FA14UOabUMqOlFeLFKzmKibrGchzYXRqNYYS93LCW9wAjde3iIYhZYS9x+R2z6dVrwo8vKvpE/2C3jrIUyzpgsUeA1Abvb9lsQbNgauA3/dHJ/sP/Q4Pd2hmrPjvVicFZqcqwfrw9X2baeJbWCQvWLRc6Hy66v3JIYeUgu7ldrKn4AbVy+GiEnGlmvOGImTNSmdSMpurotqHqQZh6ECVh3lu4BqQ2z3XDjiu984qYQ8QIDAQAB",
+  "trial_tokens": [
+    "Am8kUFdwHsKSJkulq+bTRuBddnqkyDnVZFLe2ZyKpovpEr1CeTFOV4V0n2WrAUtkFeAnxdqVHaFjQoSthxj7fgYAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ2FnaGFpbGdvaGVjaW1iamVoaWtkbGluZmJwYWllam4iLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
+  ],
+  "minimum_chrome_version": "131",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [],
+      "css": [
+        "contentStyle.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "contentStyle.css",
+        "icon-128.png",
+        "icon-32.png"
+      ],
+      "matches": []
+    }
+  ]
+}
