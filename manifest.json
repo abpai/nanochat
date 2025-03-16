@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "NanoChat",
-  "description": "NanoChat is a Chrome extension that allows you to use various AI models with your current context.",
+  "description": "A Chrome Extension that brings on-device AI to your browser using Gemini Nano",
   "background": {
     "service_worker": "src/pages/background/index.ts"
   },
