@@ -9,7 +9,7 @@
 
 NanoChat leverages Chrome's built-in Gemini Nano model to provide AI assistance directly in your browser - no API keys, no cloud processing, everything runs locally on your device. With tab context awareness, NanoChat can understand and reference the content of your active page to provide more relevant responses.
 
-![NanoChat Screenshot](screenshot.png)
+![NanoChat Screenshot](docs/images/screenshot.png)
 
 ## Features
 
@@ -86,7 +86,7 @@ NanoChat uses Chrome's experimental Gemini Nano API (available through an Origin
 1. **Clone the repository**
 
    ```
-   git clone https://github.com/yourusername/nanochat.git
+   git clone https://github.com/abpai/nanochat.git
    cd nanochat
    ```
 
